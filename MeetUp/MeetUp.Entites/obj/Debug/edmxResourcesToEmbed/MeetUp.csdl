@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MeetUpEntitesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="MeetUpEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Appointments" EntityType="MeetUpEntitesModel.Appointment" />
+    <EntitySet Name="EmployeeDetails" EntityType="MeetUpEntitesModel.EmployeeDetail" />
+    <EntitySet Name="Logins" EntityType="MeetUpEntitesModel.Login" />
+    <EntitySet Name="Status" EntityType="MeetUpEntitesModel.Status" />
+    <EntitySet Name="sysdiagrams" EntityType="MeetUpEntitesModel.sysdiagram" />
+    <AssociationSet Name="FK__Appointme__FromE__60A75C0F" Association="MeetUpEntitesModel.FK__Appointme__FromE__60A75C0F">
+      <End Role="EmployeeDetail" EntitySet="EmployeeDetails" />
+      <End Role="Appointment" EntitySet="Appointments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Appointme__Statu__628FA481" Association="MeetUpEntitesModel.FK__Appointme__Statu__628FA481">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Appointment" EntitySet="Appointments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Appointme__ToEmp__619B8048" Association="MeetUpEntitesModel.FK__Appointme__ToEmp__619B8048">
+      <End Role="EmployeeDetail" EntitySet="EmployeeDetails" />
+      <End Role="Appointment" EntitySet="Appointments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Login__EmployeeI__3C69FB99" Association="MeetUpEntitesModel.FK__Login__EmployeeI__3C69FB99">
+      <End Role="EmployeeDetail" EntitySet="EmployeeDetails" />
+      <End Role="Login" EntitySet="Logins" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Appointment">
+    <Key>
+      <PropertyRef Name="AppointmentId" />
+    </Key>
+    <Property Name="AppointmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="0" />
+    <Property Name="FromEmployeeId" Type="Int32" />
+    <Property Name="ToEmployeeId" Type="Int32" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="FromTime" Type="Time" Precision="7" />
+    <Property Name="ToTime" Type="Time" Precision="7" />
+    <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="0" />
+    <Property Name="StatusId" Type="Int32" />
+    <NavigationProperty Name="EmployeeDetail" Relationship="MeetUpEntitesModel.FK__Appointme__FromE__60A75C0F" FromRole="Appointment" ToRole="EmployeeDetail" />
+    <NavigationProperty Name="Status" Relationship="MeetUpEntitesModel.FK__Appointme__Statu__628FA481" FromRole="Appointment" ToRole="Status" />
+    <NavigationProperty Name="EmployeeDetail1" Relationship="MeetUpEntitesModel.FK__Appointme__ToEmp__619B8048" FromRole="Appointment" ToRole="EmployeeDetail" />
+  </EntityType>
+  <EntityType Name="EmployeeDetail">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+    <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EmployeePhone" Type="Decimal" Precision="10" Scale="0" />
+    <Property Name="EmployeeMailId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EmployeeAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Appointments" Relationship="MeetUpEntitesModel.FK__Appointme__FromE__60A75C0F" FromRole="EmployeeDetail" ToRole="Appointment" />
+    <NavigationProperty Name="Appointments1" Relationship="MeetUpEntitesModel.FK__Appointme__ToEmp__619B8048" FromRole="EmployeeDetail" ToRole="Appointment" />
+    <NavigationProperty Name="Logins" Relationship="MeetUpEntitesModel.FK__Login__EmployeeI__3C69FB99" FromRole="EmployeeDetail" ToRole="Login" />
+  </EntityType>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="LoginId" />
+    </Key>
+    <Property Name="LoginId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeId" Type="Int32" />
+    <Property Name="Password" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="EmployeeDetail" Relationship="MeetUpEntitesModel.FK__Login__EmployeeI__3C69FB99" FromRole="Login" ToRole="EmployeeDetail" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="StatusId" />
+    </Key>
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <Property Name="Status1" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Appointments" Relationship="MeetUpEntitesModel.FK__Appointme__Statu__628FA481" FromRole="Status" ToRole="Appointment" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK__Appointme__FromE__60A75C0F">
+    <End Type="MeetUpEntitesModel.EmployeeDetail" Role="EmployeeDetail" Multiplicity="0..1" />
+    <End Type="MeetUpEntitesModel.Appointment" Role="Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeeDetail">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="FromEmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Appointme__Statu__628FA481">
+    <End Type="MeetUpEntitesModel.Status" Role="Status" Multiplicity="0..1" />
+    <End Type="MeetUpEntitesModel.Appointment" Role="Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="StatusId" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Appointme__ToEmp__619B8048">
+    <End Type="MeetUpEntitesModel.EmployeeDetail" Role="EmployeeDetail" Multiplicity="0..1" />
+    <End Type="MeetUpEntitesModel.Appointment" Role="Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeeDetail">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="ToEmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Login__EmployeeI__3C69FB99">
+    <End Type="MeetUpEntitesModel.EmployeeDetail" Role="EmployeeDetail" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="MeetUpEntitesModel.Login" Role="Login" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeeDetail">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="Login">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

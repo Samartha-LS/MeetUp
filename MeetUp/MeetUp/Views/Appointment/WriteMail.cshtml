@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Write a Mail";
+}
+<div class="container">
+    <div class="row">
+        <div class='col-sm-3' id="new">
+            <div class="form-group">
+                <label>To Employee</label> @Html.DropDownList("EmpId", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Subject</label>
+                <div>
+                    <input type='text' class="form-control" id="subject" />
+                </div>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label for="Body">Body of the Mail</label>
+                    <textarea class="form-control" rows="6" id="body" maxlength="100"></textarea>
+                </div>
+            </div>
+            <br />
+            <input type="submit" class="btn btn-success" id="send" value="Send Mail" />
+        </div>
+        <div class='col-sm-3' style="text-align:center;top:180px">
+            <img src="~/Images/ajax-loader (2).gif" alt="loading" style="display:none;text-align:center;padding:20px;width:auto;" id="load" />
+        </div>
+    </div>
+</div>
+<script>
+    $("#send").click(function () {
+        debugger;
+        if ($('#body')[0].value == null || $('#body')[0].value == "") {
+            toastr["warning"]("Body of the mail cannot be empty", "Oops!!!")
+            return false;
+        }
+        else if ($('#subject')[0].value == null || $('#subject')[0].value == "") {
+            toastr["warning"]("Subject of the mail cannot be empty", "Oops!!!")
+            return false;
+        }
+        $('#load').show();
+        $('#new').css("opacity", 0.2);
+        var to = $("#EmpId").val();
+        var sub = $("#subject").val();
+        var body = $("#body").val();
+        $.ajax({
+            url: '@Url.Action("SendMail", "Appointment")',
+            type: "POST",
+            data: {
+                To: to,
+                Subject: sub,
+                Body: body
+            },
+            success: function (data) {
+                if (data == "True") {
+                    toastr["success"]("Mail sent")
+                    $('#load').hide();
+                    $('#new').css("opacity", 1);
+                }
+                else {
+                    toastr["error"]("Mail couldn't be send", "Failed!!!")
+                    $('#load').hide();
+                    $('#new').css("opacity", 1);
+                }
+            },
+            error: function () {
+                toastr["error"]("Error in Call", "Error!!!")
+                $('#load').hide();
+                $('#new').css("opacity", 1);
+            }
+        });
+    });
+</script>

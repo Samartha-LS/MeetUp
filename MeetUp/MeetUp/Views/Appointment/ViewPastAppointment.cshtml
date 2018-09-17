@@ -1,0 +1,62 @@
+﻿@model IEnumerable<MeetUp.Models.ViewAppointment>
+@{
+    ViewBag.Title = "Past Appointments";
+}
+<br />
+<h3>List of Past Appointments</h3>
+<hr />
+<table class="table table-active table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                From
+            </th>
+            <th>
+                To
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                From Time
+            </th>
+            <th>
+                To Time
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subject)
+            </th>
+            <th>
+                Status
+            </th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromEmpName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToEmplName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusName)
+        </td>
+    </tr>
+    }
+</table>
+

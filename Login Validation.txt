@@ -1,0 +1,8 @@
+public int LoginId { get; set; }
+        [Required(ErrorMessage ="Employee ID cannot be left blank!!!")]
+        public Nullable<int> EmployeeId { get; set; }
+        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Password cannot be left blank!!!")]
+        public string Password { get; set; }
+        public string LoginErrorMessage { get; set; }
+        public virtual EmployeeDetail EmployeeDetail { get; set; }

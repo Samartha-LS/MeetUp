@@ -1,0 +1,65 @@
+﻿@model MeetUp.Entites.Login
+@{
+     ViewBag.Title = "Login";
+}
+<style>
+    #login-div {
+        position: absolute;
+        left: 40%;
+        top: 40%;
+        border: 1px solid #ccc;
+        padding: 15px 15px;
+    }
+
+    .field-validation-error {
+        color: red;
+    }
+</style>
+<div class="form-group" id="login-div">
+    @using (Html.BeginForm("Authenticate", "Login", FormMethod.Post))
+    {
+        <table align="center">
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.EmployeeId, htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    @Html.EditorFor(Model => Model.EmployeeId, new { htmlAttributes = new { @class = "form-control" } })<br />
+                </td>
+                <br />
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    @Html.ValidationMessageFor(Model => Model.EmployeeId)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    @Html.ValidationMessageFor(Model => Model.Password)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label class="field-validation-error"> @Html.DisplayFor(Model => Model.LoginErrorMessage) </label>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" class="btn-success" name="login" value="Login" />
+                    <input type="reset" class="btn-danger" name="reset" value="Clear" />
+                </td>
+            </tr>
+        </table>
+    }
+</div>

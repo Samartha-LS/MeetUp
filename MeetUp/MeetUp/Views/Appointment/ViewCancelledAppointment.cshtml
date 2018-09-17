@@ -1,0 +1,74 @@
+﻿@model IEnumerable<MeetUp.Models.ViewAppointment>
+@{
+    ViewBag.Title = "Cancelled Appointments";
+}
+<br />
+<h3>List of Cancelled Appointments</h3>
+<hr />
+<table class="table table-hover" id="new">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                From
+            </th>
+            <th>
+                To
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                From Time
+            </th>
+            <th>
+                To Time
+            </th>
+            <th>
+                Reason
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Modified By
+            </th>
+            </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+    <tr class="table-danger">
+        <td>
+            @Html.DisplayFor(modelItem => item.FromEmpName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToEmplName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusName)
+        </td>
+        <td>
+            @if (item.StatusId == 3)
+            {
+                @Html.DisplayFor(modelItem => item.ToEmplName)
+            }
+            else
+            {
+                @Html.DisplayFor(modelItem => item.FromEmpName)
+            }
+        </td>
+    </tr>
+    }
+</table>

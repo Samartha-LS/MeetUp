@@ -5,7 +5,7 @@
 }
 <br />
 <h3 id="head">List of Upcoming Appointments</h3>
-<hr id="hr"/>
+<hr id="hr" />
 <div style="text-align:center;top:180px">
     <img src="~/Images/ajax-loader (2).gif" alt="loading" style="display:none;text-align:center;padding:20px;width:auto;" id="load" />
 </div>
@@ -30,9 +30,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Subject)
             </th>
-           <th>
-               Status
-           </th>
+            <th>
+                Status
+            </th>
             <th>
                 Action
             </th>
@@ -41,182 +41,263 @@
 
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FromEmpName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ToEmplName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FromDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FromTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ToTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Subject)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StatusName)
-        </td>
-        <td>
-            @if ((item.StatusId == 1 || item.StatusId == 5) && item.ToEmpId == Emp)
-            {
-                <input id="accept" type="submit" value="Accept" class="btn btn-success" data-AppointmentId="@item.AppointmentId" data-MailId="@item.FromMailId" data-Subject="@item.Subject" data-Date="@item.FromDate" data-FromTime="@item.FromTime" data-ToTime="@item.ToTime" data-fromEmp="@item.FromEmpId" data-toEmp="@item.ToEmpId" data-EmpName="@item.FromEmpName"/>
-                <input id="decline" type="submit" value="Decline" class="btn btn-danger" data-AppointmentId="@item.AppointmentId" data-MailId="@item.FromMailId" data-Subject="@item.Subject" data-Date="@item.FromDate" data-FromTime="@item.FromTime" data-ToTime="@item.ToTime" data-fromEmp="@item.FromEmpId" data-toEmp="@item.ToEmpId" data-EmpName="@item.FromEmpName" />
-            }
-            else if ((item.StatusId == 1 || item.StatusId == 5 || item.StatusId == 2) && item.FromEmpId == Emp)
-            {
-                @*<input id="Reschedule" type="submit" value="Reschedule" class="btn btn-success" data-AppointmentId="@item.AppointmentId" data-MailId="@item.FromMailId" data-Subject="@item.Subject" data-Date="@item.FromDate" data-FromTime="@item.FromTime" data-ToTime="@item.ToTime" data-fromEmp="@item.FromEmpId" data-toEmp="@item.ToEmpId" data-EmpName="@item.FromEmpName" />*@
-                <input id="cancel" type="submit" value="Cancel" class="btn btn-danger" data-AppointmentId="@item.AppointmentId" data-MailId="@item.ToMailId" data-Subject="@item.Subject" data-Date="@item.FromDate" data-FromTime="@item.FromTime" data-ToTime="@item.ToTime" data-fromEmp="@item.FromEmpId" data-toEmp="@item.ToEmpId" data-EmpName="@item.ToEmplName" />
-            }
-        </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FromEmpName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ToEmplName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FromDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FromTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ToTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusName)
+            </td>
+            <td>
+                @if ((item.StatusId == 1 || item.StatusId == 5) && item.ToEmpId == Emp)
+                {
+                    <input id="accept" type="submit" value="Accept" class="btn btn-success" data-AppointmentId="@item.AppointmentId" data-MailId="@item.FromMailId" data-Subject="@item.Subject" data-Date="@item.FromDate" data-FromTime="@item.FromTime" data-ToTime="@item.ToTime" data-fromEmp="@item.FromEmpId" data-toEmp="@item.ToEmpId" data-EmpName="@item.FromEmpName" />
+                    <input id="decline" type="submit" value="Decline" class="btn btn-danger" data-AppointmentId="@item.AppointmentId" data-MailId="@item.FromMailId" data-Subject="@item.Subject" data-Date="@item.FromDate" data-FromTime="@item.FromTime" data-ToTime="@item.ToTime" data-fromEmp="@item.FromEmpId" data-toEmp="@item.ToEmpId" data-EmpName="@item.FromEmpName" />
+                }
+                else if ((item.StatusId == 1 || item.StatusId == 5 || item.StatusId == 2) && item.FromEmpId == Emp)
+                {
+                    <input id="Reschedule" type="button" value="Reschedule" data-toggle="modal" data-target="#myModal" class="btn btn-success" data-AppointmentId="@item.AppointmentId" data-MailId="@item.FromMailId" data-Subject="@item.Subject" data-Date="@item.FromDate" data-FromTime="@item.FromTime" data-ToTime="@item.ToTime" data-fromEmp="@item.FromEmpId" data-toEmp="@item.ToEmpId" data-EmpName="@item.FromEmpName" />
+                    <input id="cancel" type="submit" value="Cancel" class="btn btn-danger" data-AppointmentId="@item.AppointmentId" data-MailId="@item.ToMailId" data-Subject="@item.Subject" data-Date="@item.FromDate" data-FromTime="@item.FromTime" data-ToTime="@item.ToTime" data-fromEmp="@item.FromEmpId" data-toEmp="@item.ToEmpId" data-EmpName="@item.ToEmplName" />
+                }
+            </td>
         </tr>
     }
 </table>
-<script>
-    $(function () {
-        $('#cancel').click(function (event) {
-            var reason = prompt("Reason for Cancellation", "")
-            $('#load').show();
-            $('#new').css("opacity", 0.1);
-            $('#head').css("opacity", 0.1);
-            $('#hr').css("opacity", 0.1);
-            var AppId = ($(this).attr("data-AppointmentId"));
-            var Email = ($(this).attr("data-MailId"));
-            var fromEmpId = ($(this).attr("data-fromEmp"));
-            var toEmpId = ($(this).attr("data-toEmp"));
-            var date = ($(this).attr("data-Date"));
-            var from = ($(this).attr("data-FromTime"));
-            var to = ($(this).attr("data-ToTime"));
-            var sub = ($(this).attr("data-Subject"));
-            var name = ($(this).attr("data-EmpName"));
-            $.ajax({
-                url: "/Appointment/Cancel",
-                type: "POST",
-                data: {
-                    appointmentid: AppId,
-                    MailId: Email,
-                    Reason: reason,
-                    FromEmp: fromEmpId,
-                    ToEmp: toEmpId,
-                    Date: date,
-                    From: from,
-                    To: to,
-                    Subject: sub,
-                    EmpName: name
-                },
-                success: function (data) {
-                    toastr["success"]("Appointment with " + data + " was succesfully cancelled", "Cancelled");
-                    $('#load').hide();
-                    $('#new').css("opacity", 1);
-                    $('#head').css("opacity", 1);
-                    $('#hr').css("opacity", 1);
-                },
-                error: function () {
-                    toastr["error"]("Cancelling Meeting was unsuccessful")
-                    $('#load').hide();
-                    $('#new').css("opacity", 1);
-                    $('#head').css("opacity", 1);
-                    $('#hr').css("opacity", 1);
-                }
-            })
-            $(this).closest('tr').remove();
-        });
-        $('#decline').click(function (event) {
-            var reason = prompt("Reason for Cancelling", "")
-            $('#load').show();
-            $('#new').css("opacity", 0.1);
-            $('#head').css("opacity", 0.1);
-            $('#hr').css("opacity", 0.1);
-            var AppId = ($(this).attr("data-AppointmentId"));
-            var Email = ($(this).attr("data-MailId"));
-            var fromEmpId = ($(this).attr("data-fromEmp"));
-            var toEmpId = ($(this).attr("data-toEmp"));
-            var date = ($(this).attr("data-Date"));
-            var from = ($(this).attr("data-FromTime"));
-            var to = ($(this).attr("data-ToTime"));
-            var sub = ($(this).attr("data-Subject"));
-            var name = ($(this).attr("data-EmpName"));
-            $.ajax({
-                url: "/Appointment/Decline",
-                type: "POST",
-                data: {
-                    appointmentid: AppId,
-                    MailId: Email,
-                    Reason: reason,
-                    FromEmp: fromEmpId,
-                    ToEmp: toEmpId,
-                    Date: date,
-                    From: from,
-                    To: to,
-                    Subject: sub,
-                    EmpName: name
-                },
-                success: function (data) {
-                    toastr["success"]("Appointment with " + data + " was declined cancelled", "Cancelled");
-                    $('#load').hide();
-                    $('#new').css("opacity", 1);
-                    $('#head').css("opacity", 1);
-                    $('#hr').css("opacity", 1);
-                },
-                error: function () {
-                    toastr["error"]("Declining Meeting was unsuccessful")
-                    $('#load').hide();
-                    $('#new').css("opacity", 1);
-                    $('#head').css("opacity", 1);
-                    $('#hr').css("opacity", 1);
-                }
-            })
-            $(this).closest('tr').remove();
-        });
-        $('#accept').click(function (event) {
-            $('#load').show();
-            $('#new').css("opacity", 0.1);
-            $('#head').css("opacity", 0.1);
-            $('#hr').css("opacity", 0.1);
-            var AppId = ($(this).attr("data-AppointmentId"));
-            var Email = ($(this).attr("data-MailId"));
-            var fromEmpId = ($(this).attr("data-fromEmp"));
-            var toEmpId = ($(this).attr("data-toEmp"));
-            var date = ($(this).attr("data-Date"));
-            var from = ($(this).attr("data-FromTime"));
-            var to = ($(this).attr("data-ToTime"));
-            var sub = ($(this).attr("data-Subject"));
-            var name = ($(this).attr("data-EmpName"));
-            $.ajax({
-                url: "/Appointment/Accept",
-                type: "POST",
-                data: {
-                    appointmentid: AppId,
-                    MailId: Email,
-                    FromEmp: fromEmpId,
-                    ToEmp: toEmpId,
-                    Date: date,
-                    From: from,
-                    To: to,
-                    Subject: sub,
-                    EmpName: name
-                },
-                success: function (data) {
-                    toastr["success"]("Appointment with " + data + " was accepted succesfully", "Accepted");
-                    $('#load').hide();
-                    $('#new').css("opacity", 1);
-                    $('#head').css("opacity", 1);
-                    $('#hr').css("opacity", 1);
-                },
-                error: function () {
-                    toastr["error"]("Accepting Meeting was unsuccessful")
-                    $('#load').hide();
-                    $('#new').css("opacity", 1);
-                    $('#head').css("opacity", 1);
-                    $('#hr').css("opacity", 1);
-                }
-            })
-        });
-    });
-</script>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Re-Schedule</h4>
+            </div>
+            <div class="modal-body">
+                    <div class="form-group">
+                        <label>Select Date</label>
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' class="form-control" id="datepic" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>From Time</label>
+                        <div class='input-group date' id='datetimepicker2'>
+                            <input type='text' class="form-control" id="timepic" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-time"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>To Time</label>
+                        <div class='input-group date' id='datetimepicker3'>
+                            <input type='text' class="form-control" id="totime" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-time"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <label for="Remark">Subject of Meet:</label>
+                            <textarea class="form-control" rows="4" id="Remark" maxlength="100"></textarea>
+                            <span class="alert-warning" style="float:right" id="count"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-success" id="re-schedule" value="Re-Schedule" />
+                </div>
+            </div>
+        </div>
+    </div>
+        <script>
+            var dateToday = new Date();
+            $('#datetimepicker1').datetimepicker({
+                format: 'YYYY-M-DD',
+                minDate: dateToday
+            });
+            $('#datetimepicker2').datetimepicker({
+                format: 'HH:mm'
+            });
+            $('#datetimepicker3').datetimepicker({
+                format: 'HH:mm'
+            });
+            $('#datepic').keydown(function () {
+                toastr["warning"]("Please use DatePicker for selecting date")
+                return false
+            });
+            $('#totime').keydown(function () {
+                toastr["warning"]("Please use Time Picker for selecting time")
+                return false
+            });
+            $('#timepic').keydown(function () {
+                toastr["warning"]("Please use Time Picker for selecting time")
+                return false
+            });
+            var text_len = 100;
+            $('#count').html('Characters remaining: ' + text_len);
+            $('#Remark').keyup(function () {
+                var text_length = $('#Remark').val().length;
+                var text_remaining = text_len - text_length;
+                $('#count').html('Characters remaining: ' + text_remaining);
+            });
+            $(function () {
+                $('#cancel').click(function (event) {
+                    var reason = prompt("Reason for Cancellation", "")
+                    $('#load').show();
+                    $('#new').css("opacity", 0.1);
+                    $('#head').css("opacity", 0.1);
+                    $('#hr').css("opacity", 0.1);
+                    var AppId = ($(this).attr("data-AppointmentId"));
+                    var Email = ($(this).attr("data-MailId"));
+                    var fromEmpId = ($(this).attr("data-fromEmp"));
+                    var toEmpId = ($(this).attr("data-toEmp"));
+                    var date = ($(this).attr("data-Date"));
+                    var from = ($(this).attr("data-FromTime"));
+                    var to = ($(this).attr("data-ToTime"));
+                    var sub = ($(this).attr("data-Subject"));
+                    var name = ($(this).attr("data-EmpName"));
+                    $.ajax({
+                        url: "/Appointment/Cancel",
+                        type: "POST",
+                        data: {
+                            appointmentid: AppId,
+                            MailId: Email,
+                            Reason: reason,
+                            FromEmp: fromEmpId,
+                            ToEmp: toEmpId,
+                            Date: date,
+                            From: from,
+                            To: to,
+                            Subject: sub,
+                            EmpName: name
+                        },
+                        success: function (data) {
+                            toastr["success"]("Appointment with " + data + " was succesfully cancelled", "Cancelled");
+                            $('#load').hide();
+                            $('#new').css("opacity", 1);
+                            $('#head').css("opacity", 1);
+                            $('#hr').css("opacity", 1);
+                        },
+                        error: function () {
+                            toastr["error"]("Cancelling Meeting was unsuccessful")
+                            $('#load').hide();
+                            $('#new').css("opacity", 1);
+                            $('#head').css("opacity", 1);
+                            $('#hr').css("opacity", 1);
+                        }
+                    })
+                    $(this).closest('tr').remove();
+                });
+                $('#decline').click(function (event) {
+                    var reason = prompt("Reason for Cancelling", "")
+                    $('#load').show();
+                    $('#new').css("opacity", 0.1);
+                    $('#head').css("opacity", 0.1);
+                    $('#hr').css("opacity", 0.1);
+                    var AppId = ($(this).attr("data-AppointmentId"));
+                    var Email = ($(this).attr("data-MailId"));
+                    var fromEmpId = ($(this).attr("data-fromEmp"));
+                    var toEmpId = ($(this).attr("data-toEmp"));
+                    var date = ($(this).attr("data-Date"));
+                    var from = ($(this).attr("data-FromTime"));
+                    var to = ($(this).attr("data-ToTime"));
+                    var sub = ($(this).attr("data-Subject"));
+                    var name = ($(this).attr("data-EmpName"));
+                    $.ajax({
+                        url: "/Appointment/Decline",
+                        type: "POST",
+                        data: {
+                            appointmentid: AppId,
+                            MailId: Email,
+                            Reason: reason,
+                            FromEmp: fromEmpId,
+                            ToEmp: toEmpId,
+                            Date: date,
+                            From: from,
+                            To: to,
+                            Subject: sub,
+                            EmpName: name
+                        },
+                        success: function (data) {
+                            toastr["success"]("Appointment with " + data + " was declined cancelled", "Cancelled");
+                            $('#load').hide();
+                            $('#new').css("opacity", 1);
+                            $('#head').css("opacity", 1);
+                            $('#hr').css("opacity", 1);
+                        },
+                        error: function () {
+                            toastr["error"]("Declining Meeting was unsuccessful")
+                            $('#load').hide();
+                            $('#new').css("opacity", 1);
+                            $('#head').css("opacity", 1);
+                            $('#hr').css("opacity", 1);
+                        }
+                    })
+                    $(this).closest('tr').remove();
+                });
+                $('#accept').click(function (event) {
+                    $('#load').show();
+                    $('#new').css("opacity", 0.1);
+                    $('#head').css("opacity", 0.1);
+                    $('#hr').css("opacity", 0.1);
+                    var AppId = ($(this).attr("data-AppointmentId"));
+                    var Email = ($(this).attr("data-MailId"));
+                    var fromEmpId = ($(this).attr("data-fromEmp"));
+                    var toEmpId = ($(this).attr("data-toEmp"));
+                    var date = ($(this).attr("data-Date"));
+                    var from = ($(this).attr("data-FromTime"));
+                    var to = ($(this).attr("data-ToTime"));
+                    var sub = ($(this).attr("data-Subject"));
+                    var name = ($(this).attr("data-EmpName"));
+                    $.ajax({
+                        url: "/Appointment/Accept",
+                        type: "POST",
+                        data: {
+                            appointmentid: AppId,
+                            MailId: Email,
+                            FromEmp: fromEmpId,
+                            ToEmp: toEmpId,
+                            Date: date,
+                            From: from,
+                            To: to,
+                            Subject: sub,
+                            EmpName: name
+                        },
+                        success: function (data) {
+                            toastr["success"]("Appointment with " + data + " was accepted succesfully", "Accepted");
+                            $('#load').hide();
+                            $('#new').css("opacity", 1);
+                            $('#head').css("opacity", 1);
+                            $('#hr').css("opacity", 1);
+                        },
+                        error: function () {
+                            toastr["error"]("Accepting Meeting was unsuccessful")
+                            $('#load').hide();
+                            $('#new').css("opacity", 1);
+                            $('#head').css("opacity", 1);
+                            $('#hr').css("opacity", 1);
+                        }
+                    })
+                });
+            });
+        </script>

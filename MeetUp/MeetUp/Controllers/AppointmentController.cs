@@ -50,9 +50,9 @@ namespace MeetUp.Controllers
                             where e.EmployeeId == emp
                             select e).FirstOrDefault();
                 var reciever = mail.EmployeeMailId;
-                var senderEmail = new MailAddress("cabbieptt@gmail.com", "MeetUp");
+                var senderEmail = new MailAddress("c", "MeetUp");
                 var receiverEmail = new MailAddress(reciever, "Receiver");
-                var password = "cabbie123";
+                var password = "meetup123";
                 var sub = "Appointment Request from " + name.EmployeeName;
                 var body = "Hey " + mail.EmployeeName + ", there is an Appointment request from " + name.EmployeeName + "\n\nDate: " + date + "\nTime: " + fromtime + " to: " + totime + "\n\nSubject of meet : " + Remark +"\n\nTo accept or decline please visit our MeetUp application";
                 var smtp = new SmtpClient
@@ -67,7 +67,7 @@ namespace MeetUp.Controllers
                 MailMessage mailMessage = new MailMessage();
                 mailMessage.Subject = sub;
                 mailMessage.Body = body;
-                smtp.Send("cabbieptt@gmail.com", reciever, sub, body);
+                smtp.Send("meetup.appointment@gmail.com", reciever, sub, body);
                 return true;
             }
             else
@@ -117,9 +117,9 @@ namespace MeetUp.Controllers
                         where e.EmployeeId == Emp
                         select e).FirstOrDefault();
             var reciever = MailId;
-            var senderEmail = new MailAddress("cabbieptt@gmail.com", "MeetUp");
+            var senderEmail = new MailAddress("meetup.appointment@gmail.com", "MeetUp");
             var receiverEmail = new MailAddress(reciever, "Receiver");
-            var password = "cabbie123";
+            var password = "meetup123";
             var sub = "Appointment cancelled by " + name.EmployeeName;
             var body = "Hey " + EmpName + ", your Appointment was cancelled by " + name.EmployeeName + "\nReason for Cancellation: " + reason + "\n\nWhich was scheduled on: " + Date + "\nFrom Time: " + From + " to: " + To + "\n\nSubject of meet was: " + Subject;
             var smtp = new SmtpClient
@@ -134,7 +134,7 @@ namespace MeetUp.Controllers
             MailMessage mailMessage = new MailMessage();
             mailMessage.Subject = sub;
             mailMessage.Body = body;
-            smtp.Send("cabbieptt@gmail.com", reciever, sub, body);
+            smtp.Send("meetup.appointment@gmail.com", reciever, sub, body);
             if (res > 0)
             {
                 return (EmpName);
@@ -159,9 +159,9 @@ namespace MeetUp.Controllers
                         where e.EmployeeId == Emp
                         select e).FirstOrDefault();
             var reciever = MailId;
-            var senderEmail = new MailAddress("cabbieptt@gmail.com", "MeetUp");
+            var senderEmail = new MailAddress("meetup.appointment@gmail.com", "MeetUp");
             var receiverEmail = new MailAddress(reciever, "Receiver");
-            var password = "cabbie123";
+            var password = "meetup123";
             var sub = "Appointment declined by " + name.EmployeeName;
             var body = "Hey " + EmpName + ", your Appointment was declined by " + name.EmployeeName + "\nReason for Cancellation: " + reason + "\n\nWhich was scheduled on: " + Date + "\nFrom Time: " + From + " to: " + To + "\n\nSubject of meet was: " + Subject;
             var smtp = new SmtpClient
@@ -176,7 +176,7 @@ namespace MeetUp.Controllers
             MailMessage mailMessage = new MailMessage();
             mailMessage.Subject = sub;
             mailMessage.Body = body;
-            smtp.Send("cabbieptt@gmail.com", reciever, sub, body);
+            smtp.Send("meetup.appointment@gmail.com", reciever, sub, body);
             if (res > 0)
             {
                 return (EmpName);
@@ -200,9 +200,9 @@ namespace MeetUp.Controllers
                         where e.EmployeeId == Emp
                         select e).FirstOrDefault();
             var reciever = MailId;
-            var senderEmail = new MailAddress("cabbieptt@gmail.com", "MeetUp");
+            var senderEmail = new MailAddress("meetup.appointment@gmail.com", "MeetUp");
             var receiverEmail = new MailAddress(reciever, "Receiver");
-            var password = "cabbie123";
+            var password = "meetup123";
             var sub = "Appointment Accepted by " + name.EmployeeName;
             var body = "Hey " + EmpName + ", your Appointment was accepted by " + name.EmployeeName + "\n\nScheduled on: " + Date + "\nFrom Time: " + From + " to: " + To + "\n\nSubject of meeting: " + Subject;
             var smtp = new SmtpClient
@@ -217,7 +217,7 @@ namespace MeetUp.Controllers
             MailMessage mailMessage = new MailMessage();
             mailMessage.Subject = sub;
             mailMessage.Body = body;
-            smtp.Send("cabbieptt@gmail.com", reciever, sub, body);
+            smtp.Send("meetup.appointment@gmail.com", reciever, sub, body);
             if (res > 0)
             {
                 return (EmpName);
@@ -272,9 +272,9 @@ namespace MeetUp.Controllers
                         where e.EmployeeId == Emp
                         select e).FirstOrDefault();
             var reciever = mail.EmployeeMailId;
-            var senderEmail = new MailAddress("cabbieptt@gmail.com", "MeetUp");
+            var senderEmail = new MailAddress("meetup.appointment@gmail.com", "MeetUp");
             var receiverEmail = new MailAddress(reciever, "Receiver");
-            var password = "cabbie123";
+            var password = "meetup123";
             var sub = Subject;
             var body = Body + "\n\nRegards,\n" + name.EmployeeName + "\n" + name.EmployeeMailId;
             var smtp = new SmtpClient
@@ -289,7 +289,7 @@ namespace MeetUp.Controllers
             MailMessage mailMessage = new MailMessage();
             mailMessage.Subject = sub;
             mailMessage.Body = body;
-            smtp.Send("cabbieptt@gmail.com", reciever, sub, body);
+            smtp.Send("meetup.appointment@gmail.com", reciever, sub, body);
             return true;
         }
     }

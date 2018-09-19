@@ -50,7 +50,7 @@ namespace MeetUp.Controllers
                             where e.EmployeeId == emp
                             select e).FirstOrDefault();
                 var reciever = mail.EmployeeMailId;
-                var senderEmail = new MailAddress("c", "MeetUp");
+                var senderEmail = new MailAddress("meetup.appointment@gmail.com", "MeetUp");
                 var receiverEmail = new MailAddress(reciever, "Receiver");
                 var password = "meetup123";
                 var sub = "Appointment Request from " + name.EmployeeName;

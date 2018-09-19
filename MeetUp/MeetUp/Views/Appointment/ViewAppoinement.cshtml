@@ -161,8 +161,13 @@
                 $('#count').html('Characters remaining: ' + text_remaining);
             });
             $(function () {
-                $('#cancel').click(function (event) {
+                $(document).on('click', '#cancel', function(event){
+                //$('#cancel').click(function (event) {
                     var reason = prompt("Reason for Cancellation", "")
+                    if (reason == null || reason == "") {
+                        toastr["warning"]("Reason cannot be Blank")
+                        return false;
+                    }
                     $('#load').show();
                     $('#new').css("opacity", 0.1);
                     $('#head').css("opacity", 0.1);
@@ -208,8 +213,13 @@
                     })
                     $(this).closest('tr').remove();
                 });
-                $('#decline').click(function (event) {
+                $(document).on('click', '#decline', function (event) {
+                //$('#decline').click(function (event) {
                     var reason = prompt("Reason for Cancelling", "")
+                    if (reason == null || reason == "") {
+                        toastr["warning"]("Reason cannot be Blank")
+                        return false;
+                    }
                     $('#load').show();
                     $('#new').css("opacity", 0.1);
                     $('#head').css("opacity", 0.1);
@@ -255,7 +265,8 @@
                     })
                     $(this).closest('tr').remove();
                 });
-                $('#accept').click(function (event) {
+                $(document).on('click', '#accept', function (event) {
+                //$('#accept').click(function (event) {
                     $('#load').show();
                     $('#new').css("opacity", 0.1);
                     $('#head').css("opacity", 0.1);

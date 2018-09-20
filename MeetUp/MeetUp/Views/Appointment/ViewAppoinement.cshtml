@@ -71,7 +71,7 @@
                 }
                 else if ((item.StatusId == 1 || item.StatusId == 5 || item.StatusId == 2) && item.FromEmpId == Emp)
                 {
-                    <input id="Reschedule" type="button" value="Reschedule" data-toggle="modal" data-target="#myModal" class="btn btn-success" data-AppointmentId="@item.AppointmentId" data-MailId="@item.FromMailId" data-Subject="@item.Subject" data-Date="@item.FromDate" data-FromTime="@item.FromTime" data-ToTime="@item.ToTime" data-fromEmp="@item.FromEmpId" data-toEmp="@item.ToEmpId" data-EmpName="@item.FromEmpName" />
+                    @*<input id="Reschedule" type="button" value="Reschedule" data-toggle="modal" data-target="#myModal" class="btn btn-success" data-AppointmentId="@item.AppointmentId" data-MailId="@item.FromMailId" data-Subject="@item.Subject" data-Date="@item.FromDate" data-FromTime="@item.FromTime" data-ToTime="@item.ToTime" data-fromEmp="@item.FromEmpId" data-toEmp="@item.ToEmpId" data-EmpName="@item.FromEmpName" />*@
                     <input id="cancel" type="submit" value="Cancel" class="btn btn-danger" data-AppointmentId="@item.AppointmentId" data-MailId="@item.ToMailId" data-Subject="@item.Subject" data-Date="@item.FromDate" data-FromTime="@item.FromTime" data-ToTime="@item.ToTime" data-fromEmp="@item.FromEmpId" data-toEmp="@item.ToEmpId" data-EmpName="@item.ToEmplName" />
                 }
             </td>

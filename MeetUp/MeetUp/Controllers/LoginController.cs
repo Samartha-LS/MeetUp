@@ -42,9 +42,10 @@ namespace MeetUp.Controllers
             return RedirectToAction("Index", "Login");
         }
 
-        public ActionResult Demo()
+        public bool Reset(string EmpId)
         {
-            return View();
+            int EmpParse = int.Parse(EmpId);
+            return true;
         }
     }
 }

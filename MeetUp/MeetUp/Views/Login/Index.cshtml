@@ -1,6 +1,6 @@
 ﻿@model MeetUp.Entites.Login
 @{
-     ViewBag.Title = "Login";
+    ViewBag.Title = "Login";
 }
 <style>
     #login-div {
@@ -51,6 +51,7 @@
             <tr>
                 <td colspan="2">
                     <label class="field-validation-error"> @Html.DisplayFor(Model => Model.LoginErrorMessage) </label>
+                    <a href="" style="float:right;" data-toggle="modal" data-target="#myModal">Forgot Password?</a>
                 </td>
             </tr>
             <tr>
@@ -61,5 +62,67 @@
                 </td>
             </tr>
         </table>
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Forgot Password</h4>
+                    </div>
+                    <div class="modal-body">
+                        Enter your Employee Id <input type="text" id="rempid" class="form-control" /><br />
+                        <input type="button" class="btn btn-success" id="reset" value="Request Password" />
+                    </div>
+                </div>
+            </div>
+        </div>
     }
 </div>
+@section Scripts{
+    <link href="~/Content/toastr.min.css" rel="stylesheet" />
+    <script src="~/Scripts/toastr.js"></script>
+    <script src="~/Scripts/toastr.min.js"></script>
+    <link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" />
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": false,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+        $(function () {
+            $(document).on('click', '#reset', function (event) {
+                debugger;
+                var ResetEmpId = ($("#rempid").val());
+                $.ajax({
+                    url: "/Login/Reset",
+                    type: "POST",
+                    data: {
+                        EmpId: ResetEmpId
+                    },
+                    success: function (data) {
+                        //if (data == "True") {
+                            toastr["info"]("It is recommended to change the password", "Recommendation");
+                            toastr["success"]("Kindly use the password sent to your mail", "Password sent to you Mail");
+                        //}
+                    },
+                    error: function () {
+                    }
+                })
+            });
+        });
+    </script>
+}
